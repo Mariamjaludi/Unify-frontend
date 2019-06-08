@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Unify
+Unify is a portal for prospective university students in the United Kingdom to find universities that they are eligible to apply for based on their desired course of study and their A-level scores.
 
-## Available Scripts
+## User Stories
 
-In the project directory, you can run:
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm start`
+### Prerequisites
+NPM program. The NPM program is already installed on your computer when you install Node.js.
 
-Runs the app in the development mode.<br>
+### Installing
+
+Run `npm install` to install NPM packages.<br>
+
+Run `npm start` to run the app in development mode. <br>
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `npm test`
+### Running the API
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The backend API of this application is currently hosted on [Heroku](https://unify-backend.herokuapp.com/).
 
-### `npm run build`
+### API End-Points
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The API has the following deployed end-points: <br>
+* [/students](https://unify-backend.herokuapp.com/students) <br>
+* [/universities](https://unify-backend.herokuapp.com/universities) <br>
+* [/courses](https://unify-backend.herokuapp.com/courses) <br>
+* [/subjects](https://unify-backend.herokuapp.com/subjects) <br>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Alternatively, for a faster API response time, the backend repository can be found [here](https://github.com/Mariamjaludi/Unify-backend).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### *See README instructions within the backend repository for installation and deployment instructions.*
 
-### `npm run eject`
+## Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[![Unify Demo](http://img.youtube.com/vi/E6CHLd-bafc/0.jpg)](http://www.youtube.com/watch?v=E6CHLd-bafc "Unify Demo")
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can find a demo of the application [here](https://youtu.be/E6CHLd-bafc).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Built With
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* The React Framework.
+* Semantic UI for styling.
+* Back-end and API built with Ruby on Rails.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Authors
+* Mariam Jaludi
+* Harry Bhatt: [Github](https://github.com/LondonBishop)
