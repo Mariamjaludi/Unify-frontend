@@ -36,7 +36,7 @@ export default class About extends React.Component {
         <Grid.Row stretched columns={1}>
           <Grid.Column>
             <Segment>
-              <Header as="h4">Start Now!</Header>
+              <Header as="h3">Start Now!</Header>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

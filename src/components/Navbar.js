@@ -14,8 +14,8 @@ export default class Navbar extends React.Component {
     } else {
       return (
         <Menu.Menu position="right">
-          <Menu.Item name="Sign Up" />;
-          <Menu.Item name="Log In" />;
+          <Menu.Item name="Sign Up" />
+          <Menu.Item name="Log In" />
         </Menu.Menu>
         )
     }

@@ -19,14 +19,17 @@
   list-style: none;
 }
 
-.unify-logo {
+.home-page {
   min-height: 60vh;
-  color: white;
-  font-size: 6rem;
   background-color: lightblue;
   background-image: url(https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.unify-logo {
+  min-height: 60vh;
+  color: white;
+  font-size: 7.5rem;
   line-height: 50vh;
 }
