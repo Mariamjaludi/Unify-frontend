@@ -33,3 +33,7 @@
   font-size: 7.5rem;
   line-height: 50vh;
 }
+
+.desc, .about {
+  text-align: justify;
+}

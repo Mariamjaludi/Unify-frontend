@@ -13,9 +13,9 @@ export default class About extends React.Component {
             />
           </Grid.Column>
           <Grid.Column>
-            <Segment>
+            <Segment >
               <Header as="h2">About</Header>
-              <p>
+              <p className="about">
                 Which university should you apply to? There are over 150
                 institutions in the UK offering different experiences, courses
                 and extra-curricular opportunities. Your task is to find the
@@ -25,7 +25,7 @@ export default class About extends React.Component {
                 teaching style, location, type of university and
                 extra-curricular opportunities.
               </p>
-              <p>
+              <p className="about">
                 Unify can help you narrow down your options to create the
                 optimal UCAS application and get you into the right university
                 and course for you.
@@ -37,7 +37,7 @@ export default class About extends React.Component {
           <Grid.Column>
             <Segment>
               <Header as="h3">Start Now!</Header>
-              <p>
+              <p className="about">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris

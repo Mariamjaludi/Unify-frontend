@@ -73,7 +73,7 @@ export default class HomeContainer extends React.Component {
         </Grid>
         {loginClicked ? this.renderLogInForm() : null}
         <Divider />
-        <Grid relaxed>
+        <Grid relaxed className="desc">
           <Grid.Row columns={1} padded="horizontally">
             <Grid.Column>
               <Segment>
