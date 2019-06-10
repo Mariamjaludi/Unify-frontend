@@ -5,8 +5,12 @@ export default class Navbar extends React.Component {
 
   render () {
     return (
-      <Menu fixed="top">
-        <Menu.Item>Unify</Menu.Item>
+      <Menu>
+        <Menu.Item>
+          <Link to='/'>
+            Unify
+          </Link>
+        </Menu.Item>
         <Menu.Item>
           <Link to='/about'>
             About

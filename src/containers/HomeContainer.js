@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Divider  } from 'semantic-ui-react'
+import { Button, Form, Grid, Segment, Divider  } from 'semantic-ui-react'
 export default class HomeContainer extends React.Component {
 
   state = {
