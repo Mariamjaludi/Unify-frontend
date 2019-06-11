@@ -46,25 +46,29 @@ export default class SignUp extends React.Component {
           <Header as="h2" color="blue" textAlign="center">
             Sign Up
           </Header>
-          <Form size="large">
+          <Form size="large" onSubmit={this.handleSubmit}>
             <Segment stacked>
               <Form.Input
+                onChange={this.handleChange}
+                 name='name'
                 fluid
                 icon="user"
                 iconPosition="left"
                 placeholder="Name"
               />
               <Form.Input
+                onChange={this.handleChange}
+                 name='password'
                 fluid
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
               />
-              <Form.Input fluid placeholder="UCAS ID" />
-              <Form.Input fluid placeholder="School Name" />
-              <Form.Input fluid placeholder="Location" />
-              <Form.Input fluid placeholder="Enrollment Year" />
+            <Form.Input onChange={this.handleChange} name='ucas_id' fluid placeholder="UCAS ID" />
+              <Form.Input onChange={this.handleChange} name='school_name' fluid placeholder="School Name" />
+              <Form.Input onChange={this.handleChange} name='location' fluid placeholder="Location" />
+              <Form.Input onChange={this.handleChange} name='enrollment_year' fluid placeholder="Enrollment Year" />
               <Form.Checkbox label="I agree to the Terms and Conditions" />
               <Button basic color="blue" type="submit" fluid size="large">
                 Login

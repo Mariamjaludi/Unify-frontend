@@ -58,6 +58,10 @@
   min-height: 20vh;
 }
 
+.home-bottom {
+  text-align: center
+}
+
 /* .uni-card {
   max-height: 20vh;
 } */
