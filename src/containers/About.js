@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Segment, Header, Image, Divider } from "semantic-ui-react";
+import { Grid, Segment, Header, Image } from "semantic-ui-react";
 export default class About extends React.Component {
   render() {
     return (

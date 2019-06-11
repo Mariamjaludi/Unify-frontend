@@ -37,3 +37,19 @@
 .desc, .about {
   text-align: justify;
 }
+
+.uni-list {
+  max-height: 80vh;
+  text-align: left;
+  overflow: auto;
+}
+.search-div {
+  padding: 5rem;
+}
+.search {
+  max-height: 100vh;
+
+}
+.search-form {
+  height: 80vh;
+}

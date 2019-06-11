@@ -2,24 +2,40 @@ import React from "react";
 import { Button, Form, Grid, Segment, Divider } from "semantic-ui-react";
 export default class HomeContainer extends React.Component {
   state = {
-    loginClicked: false
+    loginClicked: false,
+    name: "",
+    password: ""
   };
 
   handleLogInClick = () => {
     this.setState({ loginClicked: !this.state.loginClicked });
   };
 
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    this.props.findStudent(this.state.name, this.state.password);
+    // debugger
+  };
+
   renderLogInForm = () => {
+    const { handleChange, handleSubmit } = this;
     return (
       <Grid.Row columns={1}>
         <Grid.Column>
-          <Form size="large">
+          <Form size="large" onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
                 fluid
                 icon="user"
                 iconPosition="left"
-                placeholder="E-mail address"
+                placeholder="Name"
+                name="name"
+                onChange={handleChange}
               />
               <Form.Input
                 fluid
@@ -27,9 +43,15 @@ export default class HomeContainer extends React.Component {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
+                name="password"
+                onChange={handleChange}
               />
-
-              <Button color="blue" fluid size="large">
+              <Button
+                color="blue"
+                fluid
+                size="large"
+                type="submit"
+              >
                 Login
               </Button>
             </Segment>
@@ -49,27 +71,19 @@ export default class HomeContainer extends React.Component {
           </Grid.Row>
           <Grid.Row columns={2} stackable doubling>
             <Grid.Column>
-              <Button
-                color="blue"
-                size="big"
-                >
+              <Button color="blue" size="big">
                 Sign Up
               </Button>
             </Grid.Column>
             <Grid.Column>
-              <Button
-                color="blue"
-                size="big"
-                onClick={this.handleLogInClick}
-              >
+              <Button color="blue" size="big" onClick={this.handleLogInClick}>
                 Log In
               </Button>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-          <Segment>
-          </Segment>
-        </Grid.Row>
+            <Segment />
+          </Grid.Row>
         </Grid>
         {loginClicked ? this.renderLogInForm() : null}
         <Divider />
@@ -77,18 +91,19 @@ export default class HomeContainer extends React.Component {
           <Grid.Row columns={1} padded="horizontally">
             <Grid.Column>
               <Segment>
-              Which university should you apply to? There are over 150
-              institutions in the UK offering different experiences, courses and
-              extra-curricular opportunities. Your task is to find the
-              university, or universities, to apply to via UCAS. This is
-              achieved by establishing which universities meet your preferences
-              in relating to factors such as course provision, teaching style,
-              location, type of university and extra-curricular opportunities.
-            </Segment>
-            <Segment>
-              Unify can help you narrow down your options to create the optimal
-              UCAS application and get you into the right university and course
-              for you.
+                Which university should you apply to? There are over 150
+                institutions in the UK offering different experiences, courses
+                and extra-curricular opportunities. Your task is to find the
+                university, or universities, to apply to via UCAS. This is
+                achieved by establishing which universities meet your
+                preferences in relating to factors such as course provision,
+                teaching style, location, type of university and
+                extra-curricular opportunities.
+              </Segment>
+              <Segment>
+                Unify can help you narrow down your options to create the
+                optimal UCAS application and get you into the right university
+                and course for you.
               </Segment>
             </Grid.Column>
           </Grid.Row>

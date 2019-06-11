@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 export default class Navbar extends React.Component {
 
-  renderLogOutOrLogIn = loggedIn => {
-    if (loggedIn) {
+  renderLogOutOrLogIn = logged_in => {
+    if (logged_in) {
       return (
         <Menu.Menu position="right">
           <Menu.Item name="Welcome, Username" />
-          <Menu.Item name="log Out" />
+          <Menu.Item name="log Out" onClick={this.props.handleLogOut}/>
         </Menu.Menu>
         )
     } else {
@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
   };
 
   render() {
-    const { loggedIn } = this.props;
+    const { logged_in } = this.props;
     return (
       <Menu>
         <Menu.Item>
@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
         <Menu.Menu position="right">
-          {this.renderLogOutOrLogIn()}
+          {this.renderLogOutOrLogIn(logged_in)}
         </Menu.Menu>
       </Menu>
     );
