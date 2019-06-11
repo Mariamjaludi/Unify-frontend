@@ -104,7 +104,7 @@ export default class HomeContainer extends React.Component {
                 teaching style, location, type of university and
                 extra-curricular opportunities.
               </Segment>
-              <Segment>
+              <Segment className="home-bottom">
                 Unify can help you narrow down your options to create the
                 optimal UCAS application and get you into the right university
                 and course for you.
