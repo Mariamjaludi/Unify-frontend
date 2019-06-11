@@ -4,7 +4,7 @@ export default class UniItem extends React.Component {
   render (){
     const {uni} = this.props
     return (
-      <Item relaxed>
+      <Item >
         <Item.Image size='tiny' src={uni.src}/>
         <Item.Content>
           <Item.Header as='a'>{uni.name}</Item.Header>

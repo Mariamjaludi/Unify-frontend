@@ -69,7 +69,7 @@ export default class HomeContainer extends React.Component {
           <Grid.Row columns={1}>
             <Grid.Column className="unify-logo">Unify</Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={2} stackable doubling>
+          <Grid.Row columns={2} >
             <Grid.Column>
               <Button color="blue" size="big">
                 Sign Up

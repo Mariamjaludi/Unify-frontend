@@ -1,16 +1,20 @@
 import React from "react";
-import "./App.css";
 import { withRouter, Switch, Route } from "react-router-dom";
+import api from './api';
+
+import "./App.css";
+
 import Search from "./containers/SearchContainer";
 import Home from "./containers/HomeContainer";
 import About from "./containers/About";
 import Dashboard from "./containers/Dashboard";
 import Navbar from "./components/Navbar";
-import api from './api'
+
+
 class App extends React.Component {
   state = {
     logged_in: false,
-    student: ''
+    student: null
   };
 
   componentDidMount () {
@@ -20,13 +24,15 @@ class App extends React.Component {
         .then(student => {
           this.setState({
             logged_in: true,
-            student
+            student: student.student
           });
       });
     }
+    // debugger
   }
 
   findStudent = (name, password) => {
+    debugger
     return api.login(name, password)
       .then(data => {
         if (data.error) {
@@ -52,11 +58,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { logged_in } = this.state;
+    const { logged_in, student } = this.state;
     const { findStudent, handleLogOut } = this
     return (
         <div className="App">
           <Navbar
+            student={student}
             logged_in={logged_in}
             handleLogOut={handleLogOut}
           />

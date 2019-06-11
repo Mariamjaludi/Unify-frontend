@@ -7,7 +7,7 @@ export default class UniList extends React.Component {
     const {universities} = this.props
     return (
       <Item.Group className="uni-list">
-        {universities.map( uni => <UniItem uni={uni} /> )}
+        {universities.map( uni => <UniItem uni={uni} key={uni.id} /> )}
       </Item.Group>
     )
   }

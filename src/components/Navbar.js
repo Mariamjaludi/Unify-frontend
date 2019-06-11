@@ -4,10 +4,13 @@ import { Menu } from "semantic-ui-react";
 export default class Navbar extends React.Component {
 
   renderLogOutOrLogIn = logged_in => {
+    const {student} = this.props
+    let studentHolder = ''
+    student ? studentHolder = student.name : studentHolder = "username"
     if (logged_in) {
       return (
         <Menu.Menu position="right">
-          <Menu.Item name="Welcome, Username" />
+          <Menu.Item name={"Welcome, " + studentHolder } />
           <Menu.Item name="log Out" onClick={this.props.handleLogOut}/>
         </Menu.Menu>
         )
@@ -22,6 +25,7 @@ export default class Navbar extends React.Component {
   };
 
   render() {
+    // debugger
     const { logged_in } = this.props;
     return (
       <Menu>
