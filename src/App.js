@@ -1,26 +1,135 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { withRouter, Switch, Route } from "react-router-dom";
+import api from './api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+import Search from "./containers/SearchContainer";
+import Home from "./containers/HomeContainer";
+import About from "./containers/About";
+import Dashboard from "./containers/Dashboard";
+import Navbar from "./components/Navbar";
+import SignUp from './containers/SignUp';
+
+class App extends React.Component {
+  state = {
+    logged_in: false,
+    student: null,
+    logInClicked: false
+  };
+
+  componentDidMount () {
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.getCurrentStudent(token)
+        .then(student => {
+          this.setState({
+            logged_in: true,
+            student: student.student
+          });
+      });
+    }
+
+  }
+
+  createStudent = student => {
+    return api.signup(student)
+      .then(data => {
+        if (data.error) {
+          alert(data.error)
+        }
+        else {
+          localStorage.setItem('token', data.jwt)
+          // debugger
+            this.setState({
+              logged_in: true,
+              student: data.student
+            }, () => this.props.history.push('/search'))
+        }
+      })
+  }
+
+  findStudent = (name, password) => {
+    debugger
+    return api.login(name, password)
+      .then(data => {
+        if (data.error) {
+          alert(data.error)
+        }
+        else {
+          localStorage.setItem('token', data.jwt)
+          // debugger
+            this.setState({
+              logged_in: true,
+              student: data.student
+            }, () => this.props.history.push('/search'))
+        }
+      })
+  };
+
+  goToSignUp = () => {
+    this.props.history.push('/signup')
+  }
+
+  openLogIn = () => {
+    this.props.history.push('/')
+    this.setState({logInClicked: true})
+  }
+  handleLogOut = () => {
+    localStorage.clear("token");
+    this.setState({
+      logged_in: false,
+      student: ''
+    });
+  }
+
+  render() {
+    const { logged_in, student, logInClicked } = this.state;
+    const { findStudent, handleLogOut, goToSignUp, openLogIn } = this
+    return (
+        <div className="App">
+          <Navbar
+            student={student}
+            logged_in={logged_in}
+            handleLogOut={handleLogOut}
+            goToSignUp={goToSignUp}
+          />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={routerProps => (
+                <Home
+                  {...routerProps}
+                  logInClicked={logInClicked}
+                  findStudent={findStudent}
+                />
+              )}
+            />
+            <Route path="/about" component={About} />
+            <Route
+              path="/search"
+              component={routerProps => (
+                <Search
+                  {...routerProps}
+                  student={student}
+                />
+              )}
+            />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route
+              path="/signup"
+              component={routerProps => (
+                <SignUp
+                  {...routerProps}
+                  createStudent={this.createStudent}
+                />
+              )}
+            />
+          </Switch>
+        </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App)
