@@ -4,10 +4,10 @@ import UniItem from '../components/UniItem'
 export default class UniList extends React.Component {
 
   render () {
-    const {universities} = this.props
+    const {universities, saveUni} = this.props
     return (
       <Item.Group className="uni-list">
-        {universities.map( uni => <UniItem uni={uni} key={uni.id} /> )}
+        {universities.map( uni => <UniItem uni={uni} saveUni={saveUni} key={uni.id} /> )}
       </Item.Group>
     )
   }

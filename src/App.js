@@ -9,12 +9,13 @@ import Home from "./containers/HomeContainer";
 import About from "./containers/About";
 import Dashboard from "./containers/Dashboard";
 import Navbar from "./components/Navbar";
-
+import SignUp from './containers/SignUp';
 
 class App extends React.Component {
   state = {
     logged_in: false,
-    student: null
+    student: null,
+    logInClicked: false
   };
 
   componentDidMount () {
@@ -28,7 +29,24 @@ class App extends React.Component {
           });
       });
     }
-    
+
+  }
+
+  createStudent = student => {
+    return api.signup(student)
+      .then(data => {
+        if (data.error) {
+          alert(data.error)
+        }
+        else {
+          localStorage.setItem('token', data.jwt)
+          // debugger
+            this.setState({
+              logged_in: true,
+              student: data.student
+            }, () => this.props.history.push('/search'))
+        }
+      })
   }
 
   findStudent = (name, password) => {
@@ -44,11 +62,19 @@ class App extends React.Component {
             this.setState({
               logged_in: true,
               student: data.student
-            }, () => this.props.history.push('/dashboard'))
+            }, () => this.props.history.push('/search'))
         }
       })
   };
 
+  goToSignUp = () => {
+    this.props.history.push('/signup')
+  }
+
+  openLogIn = () => {
+    this.props.history.push('/')
+    this.setState({logInClicked: true})
+  }
   handleLogOut = () => {
     localStorage.clear("token");
     this.setState({
@@ -58,14 +84,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { logged_in, student } = this.state;
-    const { findStudent, handleLogOut } = this
+    const { logged_in, student, logInClicked } = this.state;
+    const { findStudent, handleLogOut, goToSignUp, openLogIn } = this
     return (
         <div className="App">
           <Navbar
             student={student}
             logged_in={logged_in}
             handleLogOut={handleLogOut}
+            goToSignUp={goToSignUp}
           />
           <Switch>
             <Route
@@ -74,6 +101,7 @@ class App extends React.Component {
               component={routerProps => (
                 <Home
                   {...routerProps}
+                  logInClicked={logInClicked}
                   findStudent={findStudent}
                 />
               )}
@@ -89,6 +117,15 @@ class App extends React.Component {
               )}
             />
             <Route path="/dashboard" component={Dashboard} />
+            <Route
+              path="/signup"
+              component={routerProps => (
+                <SignUp
+                  {...routerProps}
+                  createStudent={this.createStudent}
+                />
+              )}
+            />
           </Switch>
         </div>
     );

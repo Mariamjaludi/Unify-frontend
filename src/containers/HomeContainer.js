@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Grid, Segment, Divider } from "semantic-ui-react";
+import { Button, Form, Grid, Segment, Divider, Message } from "semantic-ui-react";
 export default class HomeContainer extends React.Component {
   state = {
     loginClicked: false,
@@ -56,6 +56,9 @@ export default class HomeContainer extends React.Component {
               </Button>
             </Segment>
           </Form>
+          <Message>
+            New to us? <a href='http://localhost:3001/signup'>Sign Up</a>
+          </Message>
         </Grid.Column>
       </Grid.Row>
     );
@@ -85,6 +88,7 @@ export default class HomeContainer extends React.Component {
             <Segment />
           </Grid.Row>
         </Grid>
+        {this.props.logInClicked ? this.setState({loginClicked: true }) : null}
         {loginClicked ? this.renderLogInForm() : null}
         <Divider />
         <Grid relaxed className="desc">

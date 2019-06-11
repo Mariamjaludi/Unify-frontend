@@ -13,6 +13,20 @@ const login = (name, password) => {
   }).then(res => res.json());
 };
 
+const signup = student => {
+  return fetch(`${API_BASE_URL}/students`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      name: student.name,
+      password: student.password,
+      ucas_id: student.ucas_id,
+      school_name: student.school_name,
+      enrollment_year: student.enrollment_year,
+      location: student.location
+    })
+  }).then(res => res.json());
+}
 const getCurrentStudent = token => {
   return fetch(`${API_BASE_URL}/auth/show`, {
     headers: { ...headers, Authorization: token }
@@ -27,5 +41,6 @@ const getUniversities = () => {
 export default {
   login,
   getCurrentStudent,
-  getUniversities
+  getUniversities,
+  signup
 };

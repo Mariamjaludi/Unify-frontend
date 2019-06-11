@@ -53,3 +53,11 @@
 .search-form {
   height: 80vh;
 }
+
+.saved-unis-container {
+  min-height: 20vh;
+}
+
+/* .uni-card {
+  max-height: 20vh;
+} */

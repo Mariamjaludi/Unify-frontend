@@ -3,7 +3,7 @@ import api from '../api';
 import { Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 import UniList from './UniList'
-
+import UniCardList from './UniCardList'
 export default class SearchContainer extends React.Component {
 
   state = {
@@ -15,7 +15,9 @@ export default class SearchContainer extends React.Component {
     grade1: null,
     grade2: null,
     grade3: null,
-    courseId: null
+    courseId: null,
+    course: null,
+    savedUnis: []
   }
 
   componentDidMount () {
@@ -28,6 +30,10 @@ export default class SearchContainer extends React.Component {
       this.setState({ [id]: value });
     };
 
+    removeUni = uni => {
+      this.setState({ savedUnis: this.state.savedUnis.filter(sUni => sUni !== uni ) })
+    }
+
     handleSubmit = event => {
       const {universities, courseId, subject1, grade1 } = this.state
       event.preventDefault();
@@ -35,6 +41,7 @@ export default class SearchContainer extends React.Component {
       let filteredUnis = [];
       universities.forEach( uni => {
         let foundCourse = uni.courses.find(course => course.course_id === courseId )
+        this.setState({course: foundCourse})
         if (foundCourse) {
           let matchSubject = foundCourse.subjects.find(
             subject => subject.subject_name === subject1 && subject.grade_val <= grade1 )
@@ -108,35 +115,44 @@ export default class SearchContainer extends React.Component {
     )
   }
 
+  saveUni = uni => {
+    // debugger
+    if (this.state.savedUnis.length < 5) {
+      this.setState({
+        savedUnis: [...this.state.savedUnis, uni]
+      })
+    }
+  }
+
   render () {
-    const {filteredUnis} = this.state
+    const {filteredUnis, savedUnis, course} = this.state
     return (
       <div>
-        Search
+        <Header as='h1'>Search for Universities</Header>
         <div className='search-div'>
-          <Grid className="search">
+          <Grid className="search" >
             <Grid.Row columns={1}>
               <Grid.Column>
-                <Header>Your Universities</Header>
+                <Header as='h3'>Your Saved Universities</Header>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row columns={5}>
-              <Grid.Column>1</Grid.Column>
-              <Grid.Column>2</Grid.Column>
-              <Grid.Column>3</Grid.Column>
-              <Grid.Column>4</Grid.Column>
-              <Grid.Column>5</Grid.Column>
+            <Grid.Row>
+              <Grid.Column>
+                <Segment className="saved-unis-container">
+                  <UniCardList universities={savedUnis} removeUni={this.removeUni} course={course}/>
+                </Segment>
+              </Grid.Column>
             </Grid.Row>
 
             <Grid.Row columns={2}>
               <Grid.Column >
-                <Segment>
+                <Segment >
                   {this.renderForm()}
                 </Segment>
               </Grid.Column >
               <Grid.Column >
                 <Segment>
-                  <UniList universities={filteredUnis} />
+                  <UniList universities={filteredUnis}  saveUni={this.saveUni} />
                 </Segment>
               </Grid.Column>
             </Grid.Row>
@@ -147,3 +163,9 @@ export default class SearchContainer extends React.Component {
     )
   }
 }
+
+// Grid.Column>1</Grid.Column>
+// <Grid.Column>2</Grid.Column>
+// <Grid.Column>3</Grid.Column>
+// <Grid.Column>4</Grid.Column>
+// <Grid.Column>5</Grid.Column>
