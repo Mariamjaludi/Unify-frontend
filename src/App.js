@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   createStudent = student => {
-    debugger
+    // debugger
     return api.signup(student)
       .then(data => {
         if (data.error) {
