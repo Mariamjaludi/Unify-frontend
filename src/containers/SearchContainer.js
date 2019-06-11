@@ -1,18 +1,50 @@
 import React from 'react'
-import UniList from './UniList'
+import api from '../api';
 import { Form, Grid, Header, Segment } from 'semantic-ui-react'
+
+import UniList from './UniList'
+
 export default class SearchContainer extends React.Component {
 
   state = {
-    universities: []
+    universities: [],
+    filteredUnis: [],
+    subject1: null,
+    subject2: null,
+    subject3: null,
+    grade1: null,
+    grade2: null,
+    grade3: null,
+    courseId: null
   }
 
   componentDidMount () {
-    const API_BASE_URL = `http://localhost:3000`;
-    fetch(`${API_BASE_URL}/universities`)
-      .then(resp => resp.json())
-      .then(universities => this.setState({universities}))
+    api.getUniversities()
+      .then(universities => this.setState({ universities, filteredUnis: universities }))
     }
+
+    handleChange = (e, { id, value }) => {
+      // debugger
+      this.setState({ [id]: value });
+    };
+
+    handleSubmit = event => {
+      const {universities, courseId, subject1, grade1 } = this.state
+      event.preventDefault();
+      //filter universities based on course
+      let filteredUnis = [];
+      universities.forEach( uni => {
+        let foundCourse = uni.courses.find(course => course.course_id === courseId )
+        if (foundCourse) {
+          let matchSubject = foundCourse.subjects.find(
+            subject => subject.subject_name === subject1 && subject.grade_val <= grade1 )
+          if (matchSubject) {
+            filteredUnis = [...filteredUnis, uni]
+          }
+        }
+      })
+      this.setState({ filteredUnis })
+    };
 
   renderForm = () => {
     const subjects = [
@@ -33,51 +65,51 @@ export default class SearchContainer extends React.Component {
     ]
 
     const grades = [
-      {text: 'A*' , value: 'A*'},
-      {text: 'A' , value: 'A' },
-      {text: 'B' , value: 'B' },
-      {text: 'C' , value: 'C' },
-      {text: 'D' , value: 'D' },
-      {text: 'F' , value: 'F' },
-      {text: 'U' , value: 'U' }
+      {text: 'A*' , value: '6'},
+      {text: 'A' , value: '5' },
+      {text: 'B' , value: '4' },
+      {text: 'C' , value: '3' },
+      {text: 'D' , value: '2' },
+      {text: 'F' , value: '1' },
+      {text: 'U' , value: '0' }
     ]
 
     const courses = [
-      { text: 'Medicine A100', value: 'Medicine' },
-      { text: 'Business Management N100', value: 'Business Management' },
-      { text: 'Computer Science G400', value: 'Computer Science' },
-      { text: 'Pharmacology B230', value: 'Pharmacology' },
-      { text: 'English Q300', value: 'English' },
-      { text: 'Architecture K100', value: 'Architecture' },
-      { text: 'Economics L100', value: 'Economics' },
-      { text: 'Mathematics G100', value: 'Mathematics' },
-      { text: 'History V100', value: 'History' }
+      { text: 'Medicine A100', value: 1 },
+      { text: 'Business Management N100', value: 2 },
+      { text: 'Computer Science G400', value: 3 },
+      { text: 'Pharmacology B230', value: 4 },
+      { text: 'English Q300', value: 5 },
+      { text: 'Architecture K100', value: 6 },
+      { text: 'Economics L100', value: 7 },
+      { text: 'Mathematics G100', value: 8 },
+      { text: 'History V100', value: 9 }
     ]
 
     return (
-      <Form className="search-form">
+      <Form className="search-form" onSubmit={this.handleSubmit}>
         <Header as="h3">Enter your A-level subjects</Header>
         <Form.Group inline widths='equal'>
-          <Form.Select fluid options={subjects} label='Subject 1' placeholder='Subject 1' />
-          <Form.Select fluid options={grades} label='Grade 1' placeholder='Grade 1' />
+          <Form.Select onChange={ this.handleChange } id="subject1" fluid options={subjects} label='Subject 1' placeholder='Subject 1' />
+        <Form.Select onChange={ this.handleChange } id="grade1" fluid options={grades} label='Grade 1' placeholder='Grade 1' />
         </Form.Group>
         <Form.Group inline widths='equal'>
-          <Form.Select fluid options={subjects} label='Subject 2' placeholder='Subject 2' />
-          <Form.Select fluid options={grades} label='Grade 2' placeholder='Grade 2' />
+          <Form.Select onChange={ this.handleChange } id="subject2" fluid options={subjects} label='Subject 2' placeholder='Subject 2' />
+          <Form.Select onChange={ this.handleChange } id="grade2" fluid options={grades} label='Grade 2' placeholder='Grade 2' />
         </Form.Group>
         <Form.Group inline widths='equal'>
-          <Form.Select fluid options={subjects} label='Subject 3' placeholder='Subject 3' />
-          <Form.Select fluid options={grades} label='Grade 3' placeholder='Grade 3' />
+          <Form.Select onChange={ this.handleChange } id="subject3" fluid options={subjects} label='Subject 3' placeholder='Subject 3' />
+          <Form.Select onChange={ this.handleChange } id="grade3" fluid options={grades} label='Grade 3' placeholder='Grade 3' />
         </Form.Group>
         <Header as="h3">Choose your Course of Study</Header>
-        <Form.Select fluid options={courses} label='courses' placeholder='Courses' />
+        <Form.Select onChange={ this.handleChange } id="courseId" fluid options={courses} label='courses' placeholder='Courses' />
         <Form.Button basic color='blue'>Search</Form.Button>
       </Form>
     )
   }
 
   render () {
-    const {universities} = this.state
+    const {filteredUnis} = this.state
     return (
       <div>
         Search
@@ -95,7 +127,7 @@ export default class SearchContainer extends React.Component {
               <Grid.Column>4</Grid.Column>
               <Grid.Column>5</Grid.Column>
             </Grid.Row>
-            
+
             <Grid.Row columns={2}>
               <Grid.Column >
                 <Segment>
@@ -104,7 +136,7 @@ export default class SearchContainer extends React.Component {
               </Grid.Column >
               <Grid.Column >
                 <Segment>
-                  <UniList universities={universities} />
+                  <UniList universities={filteredUnis} />
                 </Segment>
               </Grid.Column>
             </Grid.Row>

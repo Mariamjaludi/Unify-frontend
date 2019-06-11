@@ -28,7 +28,7 @@ class App extends React.Component {
           });
       });
     }
-    // debugger
+    
   }
 
   findStudent = (name, password) => {
@@ -79,7 +79,15 @@ class App extends React.Component {
               )}
             />
             <Route path="/about" component={About} />
-            <Route path="/search" component={Search} />
+            <Route
+              path="/search"
+              component={routerProps => (
+                <Search
+                  {...routerProps}
+                  student={student}
+                />
+              )}
+            />
             <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </div>

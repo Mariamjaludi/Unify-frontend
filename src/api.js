@@ -19,7 +19,13 @@ const getCurrentStudent = token => {
   }).then(res => res.json());
 };
 
+const getUniversities = () => {
+  return fetch(`${API_BASE_URL}/universities`)
+    .then(resp => resp.json());
+}
+
 export default {
   login,
-  getCurrentStudent
+  getCurrentStudent,
+  getUniversities
 };
