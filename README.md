@@ -49,3 +49,4 @@ You can find a demo of the application [here](https://youtu.be/wCCo7pcl71w).
 
 ## Authors
 * Mariam Jaludi
+* Harry Bhatt
