@@ -37,9 +37,9 @@ Alternatively, for a faster API response time, the backend repository can be fou
 
 ## Demo
 
-[![Unify Demo](http://img.youtube.com/vi/E6CHLd-bafc/0.jpg)](http://www.youtube.com/watch?v=E6CHLd-bafc "Unify Demo")
+[![Unify Demo](http://img.youtube.com/vi/wCCo7pcl71w/0.jpg)](https://youtu.be/wCCo7pcl71w "Unify Demo")
 
-You can find a demo of the application [here](https://youtu.be/E6CHLd-bafc).
+You can find a demo of the application [here](https://youtu.be/wCCo7pcl71w).
 
 ## Built With
 
@@ -49,4 +49,3 @@ You can find a demo of the application [here](https://youtu.be/E6CHLd-bafc).
 
 ## Authors
 * Mariam Jaludi
-* Harry Bhatt: [Github](https://github.com/LondonBishop)
